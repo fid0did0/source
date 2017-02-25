@@ -1,0 +1,85 @@
+/dts-v1/;
+
+#include "mt7620n.dtsi"
+
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/input/input.h>
+
+/ {
+	compatible = "d-link,dwr-921", "ralink,mt7620n-soc";
+	model = "D-Link DWR-921";
+
+};
+
+&gpio1 {
+	status = "okay";
+};
+
+&gpio2 {
+	status = "okay";
+};
+
+&gpio3 {
+	status = "okay";
+};
+
+&spi0 {
+	status = "okay";
+
+	m25p80@0 {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		compatible = "jedec,spi-nor";
+		reg = <0>;
+		spi-max-frequency = <10000000>;
+
+		bootloader: partition@0 {
+			label = "bootloader";
+			reg = <0x0 0x10000>;
+			read-only;
+		};
+
+		kernel: partition@10000 {
+			label = "kernel";
+			reg = <0x10000 0x170000>;
+		};
+
+		rootfs: partition@180000 {
+			label = "rootfs";
+			reg = <0x180000 0xe60000>;
+		};
+
+		config: partition@ff0000 {
+			label = "config";
+			reg = <0xff0000 0x10000>;
+			read-only;
+		};
+
+	};
+};
+
+&ehci {
+	status = "okay";
+};
+
+&ohci {
+	status = "okay";
+};
+
+&ethernet {
+	mtd-mac-address = <&config 0xe2ac>;
+	mediatek,portmap = "wllll";
+};
+
+&wmac {
+	ralink,mtd-eeprom = <&config 0xe08e>;
+};
+
+&pinctrl {
+	state_default: pinctrl0 {
+		default {
+			ralink,group = "uartf", "i2c", "wdt", "rgmii2", "wdt rst", "jtag", "mdio";
+			ralink,function = "gpio";
+		};
+	};
+};
