@@ -76,6 +76,7 @@ get_status_led() {
 	dir-615-h1|\
 	dir-620-a1|\
 	dir-620-d1|\
+	dwr-512-a1|\
 	dwr-512-b|\
 	hpm|\
 	hw550-3g|\

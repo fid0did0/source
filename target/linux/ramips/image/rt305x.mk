@@ -296,6 +296,14 @@ define Device/dir-620-d1
 endef
 TARGET_DEVICES += dir-620-d1
 
+define Device/dwr-512-a1
+  DTS := DWR-512-A1
+  IMAGE_SIZE := 3700k
+  DEVICE_TITLE := D-Link DWR-512 A1
+  DEVICE_PACKAGES := kmod-spi-dev kmod-usb2 kmod-usb-net kmod-usb-net-rndis usb-modeswitch 
+endef
+TARGET_DEVICES += dwr-512-a1
+
 define Device/dwr-512-b
   DTS := DWR-512-B
   IMAGE_SIZE := 7700k
